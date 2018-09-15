@@ -1,0 +1,3 @@
+[submodule "submodule/ofxGpuParticles"]
+	path = submodule/ofxGpuParticles
+	url = https://github.com/neilmendoza/ofxGpuParticles
