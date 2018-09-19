@@ -4,7 +4,7 @@ StringParticleSystem::StringParticleSystem() :
     x_skip_(4),
     y_skip_(4),
     size_(2),
-    color_(ofRandom(200, 255), 255, 0, 128) {
+    color_(ofFloatColor(0.9, 0.9, 0.2, 0.1)) {
     font_.loadFont("fonts/georgiab.ttf", 80, true, true);
 }
 
@@ -23,6 +23,7 @@ void StringParticleSystem::update(const float delta) {
 }
 
 void StringParticleSystem::draw() {
+    ofSetColor(color_);
     for (Particle& p : particles_) {
         p.draw();
     }
@@ -43,8 +44,7 @@ void StringParticleSystem::addParticles(const ofVec2f& start_pos) {
                                               ofGetWidth()  * 0.5f + x - end_x * 0.5f,
                                               ofGetHeight() * 0.9f + y - end_y * 0.5f,
                                               size_,
-                                              ofRandom(0.5, 3),
-                                              color_));
+                                              ofRandom(0.5, 3)));
             }
         }
     }
@@ -71,5 +71,9 @@ void StringParticleSystem::reset(const int x, const int y) {
     for (Particle& p : particles_) {
         p.reset(x, y);
     }
+}
+
+void StringParticleSystem::setColor(const ofColor& color) {
+    color_ = color;
 }
 

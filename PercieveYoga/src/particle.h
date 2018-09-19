@@ -7,13 +7,11 @@ public:
     Particle(const float start_x, const float start_y,
              const float end_x,   const float end_y,
              const float size, 
-             const float duration,
-             const ofColor& color);
+             const float duration);
     void reset(const float start_x, const float start_y);
 
     void update(const float delta);
     void draw();
-
 private:
     float interpolate(float f);
 
@@ -25,5 +23,4 @@ private:
     float size_;
     float duration_;
     float progress_;
-    ofColor color_;
 };

@@ -3,14 +3,12 @@
 Particle::Particle(const float start_x, const float start_y,
                    const float end_x,   const float end_y,
                    const float size,
-                   const float duration,
-                   const ofColor& color) : 
+                   const float duration) : 
     start_(start_x, start_y),
     end_(end_x, end_y),
     size_(size),
     duration_(duration),
-    progress_(0),
-    color_(color) {
+    progress_(0) {
 
     float angle = ofRandom(TWO_PI);
     anchor_ = ofVec2f(cos(angle) * ofRandom(100, 800) + ofGetWidth() * 0.5,
@@ -39,7 +37,6 @@ void Particle::update(const float delta) {
 }
 
 void Particle::draw() {
-    ofSetColor(color_);
     ofDrawCircle(current_.x, current_.y, size_);
 }
 

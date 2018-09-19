@@ -8,7 +8,7 @@ void ofApp::setup(){
     ofSetWindowShape(kWindowWidth, kWindowHeight);
     ofSetWindowPosition(0, 0);
 
-    ofSetFrameRate(60);
+    ofSetFrameRate(30);
     ofSetVerticalSync(true);
     ofBackground(0);
 
@@ -64,12 +64,6 @@ void ofApp::draw(){
         drawYoggyInZone();
     } else {
         drawYoggy();
-    }
-
-    if (yoga_state_manager_.isGoodPose()) {
-        // TODO ‚Í‚ñ‚È‚è‚ÆÁ‚·
-        particle_.draw();
-        string_ps_.draw();
     }
 
     // for Debug
@@ -180,6 +174,15 @@ void ofApp::drawYoggy() {
     kinect_.getColorImageData(tex, yoga_state_manager_.isPracticing());
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     tex.draw(0, 0);
+
+    uint32_t goodness = yoga_state_manager_.getPoseGoodness();
+    if (goodness > 0) {
+        particle_.setColor(ofFloatColor(0.9, 0.9, 0.2, static_cast<float>(goodness) * 0.001));
+        string_ps_.setColor(ofFloatColor(0.9, 0.9, 0.2, static_cast<float>(goodness) * 0.001));
+
+        particle_.draw();
+        string_ps_.draw();
+    }
 }
 
 void ofApp::drawYoggyInZone() {

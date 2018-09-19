@@ -85,3 +85,8 @@ void ParticleSystem::setCenterPoint(const ofVec2f& point) {
 void ParticleSystem::setRadius(const float radius) {
     radius_ = radius;
 }
+
+void ParticleSystem::setColor(const ofColor& color) {
+    color_ = color;
+}
+

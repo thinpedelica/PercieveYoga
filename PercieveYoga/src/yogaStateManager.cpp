@@ -3,7 +3,8 @@
 YogaStateManager::YogaStateManager() :
     current_state_(kNotReady),
     is_pose_keeping_(false),
-    is_good_yoga_pose_(false),
+    is_good_pose_(false),
+    pose_goodness_(0),
     last_pose_id_(0.0) {
     // none
 }
@@ -28,6 +29,7 @@ void YogaStateManager::update(const YogaPoseID pose_id, const double proba) {
             break;
     }
 
+    updatePoseGoodness();
     last_pose_id_ = pose_id;
 }
 
@@ -48,11 +50,11 @@ bool YogaStateManager::isInZone() {
 }
 
 bool YogaStateManager::isGoodPose() {
-    if (current_state_ == kInZone) {
-        // always good pose if in zone :)
-        return true;
-    }
-    return is_good_yoga_pose_;
+    return is_good_pose_;
+}
+
+uint32_t YogaStateManager::getPoseGoodness() {
+    return pose_goodness_;
 }
 
 void YogaStateManager::doGetReady(const YogaPoseID pose_id, const double proba) {
@@ -72,12 +74,13 @@ void YogaStateManager::doGetReady(const YogaPoseID pose_id, const double proba) 
 }
 
 void YogaStateManager::doPractice(const YogaPoseID pose_id, const double proba) {
+    // TODO functionalize condition checks
     if ((pose_id > kPoseReady) &&
         (last_pose_id_ == pose_id) &&
         (proba > 0.8)) {
         if (is_pose_keeping_) {
             if (getPoseKeepTimeMS() > kEnoughKeepTimeMS) {
-                is_good_yoga_pose_ = true;
+                is_good_pose_ = true;
             }
         } else {
             is_pose_keeping_ = true;
@@ -97,7 +100,7 @@ void YogaStateManager::doPractice(const YogaPoseID pose_id, const double proba) 
         }
     } else {
         is_pose_keeping_   = false;
-        is_good_yoga_pose_ = false;
+        is_good_pose_ = false;
     }
 }
 
@@ -122,4 +125,16 @@ double YogaStateManager::getPoseKeepTimeMS() {
     double keep_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - pose_keep_start_time_).count();
 
     return keep_time;
+}
+
+void YogaStateManager::updatePoseGoodness() {
+    if (is_good_pose_) {
+        if (pose_goodness_ != kPoseGoodnessMax) {
+            pose_goodness_ += kPoseGoodnessDelta;
+        }
+    } else {
+        if (pose_goodness_ != 0) {
+            pose_goodness_ -= kPoseGoodnessDelta;
+        }
+    }
 }

@@ -17,6 +17,7 @@ public:
     ofVec2f getCenterPoint() { return center_pos_; }
     void setCenterPoint(const ofVec2f& point);
     void setRadius(const float radius);
+    void setColor(const ofColor& color);
 
 private:
     static constexpr float kNormalRadius = 500.f;

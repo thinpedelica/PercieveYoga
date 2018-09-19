@@ -14,6 +14,7 @@ public:
     void update(const float delta);
     void draw();
     void reset(const int x, const int y);
+    void setColor(const ofColor& color);
 private:
     void addParticles(const ofVec2f& start_pos);
     void createPixelsMessage();
