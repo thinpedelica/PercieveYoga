@@ -12,6 +12,7 @@ ParticleSystem::~ParticleSystem() {
 void ParticleSystem::setup(const int width, const int height) {
     width_        = width;
     height_       = height;
+    size_         = 1.0f;
     center_pos_.x = width_  * .5f;
     center_pos_.y = height_ * .5f;
     radius_       = kNormalRadius;
@@ -57,6 +58,7 @@ void ParticleSystem::update() {
 
 void ParticleSystem::draw() {
     cam_.begin();
+    glPointSize(size_);
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     particles_.draw();
     ofDisableBlendMode();

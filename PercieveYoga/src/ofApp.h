@@ -34,7 +34,7 @@ class ofApp : public ofBaseApp{
         static constexpr size_t kWindowHeight = 1080;
 
         void updateParticlesCenter(const std::vector<ofVec2f>& joints);
-        void updateStringParticle();
+        void updatePoseName();
         void drawYoggy();
         void drawYoggyInZone();
 

@@ -184,7 +184,6 @@ c:\openframeworks\apps\PerceiveYoga\PercieveYoga\submodule\ofxGpuParticles\src;%
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\myKinect2.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\particle.cpp" />
     <ClCompile Include="src\particleSystem.cpp" />
     <ClCompile Include="src\predictYogaPose.cpp" />
     <ClCompile Include="src\stringParticleSystem.cpp" />
@@ -195,7 +194,6 @@ c:\openframeworks\apps\PerceiveYoga\PercieveYoga\submodule\ofxGpuParticles\src;%
     <ClInclude Include="..\..\..\..\apps\PerceiveYoga\PercieveYoga\submodule\ofxGpuParticles\src\ofxGpuParticles.h" />
     <ClInclude Include="src\myKinect2.h" />
     <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\particle.h" />
     <ClInclude Include="src\particleSystem.h" />
     <ClInclude Include="src\predictYogaPose.h" />
     <ClInclude Include="src\stringParticleSystem.h" />

@@ -52,10 +52,14 @@ void ofApp::update(){
 
         yoga_state_manager_.update(pose_id_, proba_);
         updateParticlesCenter(joints);
-        updateStringParticle();
+        updatePoseName();
     }
 
-    particle_.update();
+    uint32_t goodness = yoga_state_manager_.getPoseGoodness();
+    if (goodness > 0) {
+        particle_.update();
+        string_ps_.update(1.0f / 120);
+    }
 }
 
 //--------------------------------------------------------------
@@ -148,7 +152,7 @@ void ofApp::updateParticlesCenter(const std::vector<ofVec2f>& joints) {
                                      joints.at(highest_point).y));
 }
 
-void ofApp::updateStringParticle() {
+void ofApp::updatePoseName() {
     static bool is_good_pose = false;
     if (yoga_state_manager_.isGoodPose()) {
         if (is_good_pose == false) {
@@ -158,7 +162,6 @@ void ofApp::updateStringParticle() {
 
             string_ps_.setup(pose_name, start_pos);
         }
-        string_ps_.update(1.0f/60);
     } else {
         is_good_pose = false;
     }
@@ -178,7 +181,7 @@ void ofApp::drawYoggy() {
     uint32_t goodness = yoga_state_manager_.getPoseGoodness();
     if (goodness > 0) {
         particle_.setColor(ofFloatColor(0.9, 0.9, 0.2, static_cast<float>(goodness) * 0.001));
-        string_ps_.setColor(ofFloatColor(0.9, 0.9, 0.2, static_cast<float>(goodness) * 0.001));
+        string_ps_.setColor(ofFloatColor(0.9, 0.9, 0.2, static_cast<float>(goodness) * 0.01));
 
         particle_.draw();
         string_ps_.draw();

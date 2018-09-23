@@ -29,6 +29,7 @@ private:
     float radius_;
     int width_;
     int height_;
+    float size_;
     ofFloatColor color_;
     ofEasyCam cam_;
 
